@@ -3,7 +3,7 @@ clear; close all;
 addpath('../')
 
 const.N_pix = [2 2 2];
-const.N_ele = [5 5 5];
+const.N_ele = [1 1 1];
 const.unit_cell_size = [2 2 2];
 
 temp = ones(1,prod(const.N_pix));
@@ -22,9 +22,15 @@ const.design_scale = 'linear';
 const.N_eig = 20;
 const.sigma_eig = 1;
 
-[K,M] = get_system_matrices(const);
+wavevector = [-pi/const.unit_cell_size(1) ,0,0];
 
-[vecs,vals] = eigs(K,M,const.N_eig,const.sigma_eig);
+[K,M] = get_system_matrices(const);
+[T,~] = get_transformation_matrix(wavevector,const);
+
+Kr = T'*K*T;
+Mr = T'*M*T;
+
+[vecs,vals] = eigs(Kr,Mr,const.N_eig,const.sigma_eig);
 % [vecs,vals] = eigs(K,M,const.N_eig,const.sigma_eig,'IsSymmetricDefinite',true);
 
 eigenvalues = diag(vals);
