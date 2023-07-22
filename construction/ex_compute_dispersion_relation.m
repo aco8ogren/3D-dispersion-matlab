@@ -27,7 +27,7 @@ c.nu_max = 0.3; % 0.49
 c.unit_cell_size = [2 2 2]; % [m]
 c.struct_idxs = [];
 
-c.isUseGPU = false;
+c.isUseGPU = true;
 c.isSaveEigenvectors = false;
 c.isUseParallel = true;
 c.numParallelWorkers = 20;
