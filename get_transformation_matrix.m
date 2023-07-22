@@ -159,30 +159,4 @@ function [T,dTdwavevector] = get_transformation_matrix(wavevector,const)
         % 2D-dispersion. The implementation shouldn't be that bad.
         % dphase_vector =  
     end
-
-    figure
-    imagesc(real(T))
-    daspect([1 1 1])
-    %     % Generate node grid coordinates for the full set of nodes.
-    % %
-    % % full_node_grid_coordinates(i,:) gives the grid coordinates of the
-    % % ith (globally labeled) node in the full set of nodes.
-    % node_grid_vec_x = 1:N_node(1);
-    % node_grid_vec_y = 1:N_node(2);
-    % node_grid_vec_z = 1:N_node(3);
-    % [X,Y,Z] = ndgrid(node_grid_vec_x,node_grid_vec_y,node_grid_vec_z);
-    % full_node_grid_coordinates = [X(:) Y(:) Z(:)];
-    % 
-    % 
-    % % Generate node grid coordinates for the reduced set of nodes. There is
-    % % one less node in each direction for the reduced set of nodes as
-    % % compared to the full set of nodes.
-    % %
-    % % reduced_node_grid_coordinates(i,:) gives the grid coordinates of the
-    % % ith (globally labeled) node in the reduced set of nodes.
-    % node_grid_vec_x = 1:(N_node(1)-1);
-    % node_grid_vec_y = 1:(N_node(2)-1);
-    % node_grid_vec_z = 1:(N_node(3)-1);
-    % [X,Y,Z] = ndgrid(node_grid_vec_x,node_grid_vec_y,node_grid_vec_z);
-    % reduced_node_grid_coordinates = [X(:) Y(:) Z(:)];
 end
