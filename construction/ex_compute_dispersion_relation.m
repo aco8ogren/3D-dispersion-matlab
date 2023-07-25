@@ -16,7 +16,7 @@ isSaveOutput = false;
 c.N_pix = [10 10 10];
 c.N_ele = [1 1 1];
 c.N_eig = 20;
-c.N_wv = [5 5 3];
+c.N_wv = [11 11 6];
 
 c.E_min = 200e6; % 200e6
 c.E_max = 200e6; % 200e9
@@ -27,7 +27,7 @@ c.nu_max = 0.3; % 0.49
 c.unit_cell_size = [2 2 2]; % [m]
 c.struct_idxs = [];
 
-c.isUseGPU = true;
+c.isUseGPU = false;
 c.isSaveEigenvectors = false;
 c.isUseParallel = true;
 c.numParallelWorkers = 20;
@@ -50,3 +50,7 @@ end
 
 t_total = toc(t_total);
 disp(['total time elapsed ' num2str(t_total) ' sec'])
+
+eig_idx_to_plot = 1;
+plot_dispersion_relation(wv,fr,1)
+
