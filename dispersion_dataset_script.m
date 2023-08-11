@@ -13,11 +13,11 @@ c.isSaveEigenvectors = false;
 checkpoint_chunk_size = 1;
 
 % c is the new const
-c.N_pix = [10 10 10];
+c.N_pix = [5 5 5];
 c.N_ele = [1 1 1];
 c.N_eig = 10;
-c.N_struct = 10000;
-c.N_wv = [11 11 6];
+c.N_struct = 3;
+c.N_wv = [5 5 3];
 c.rng_seed_offset = 0;
 
 c.E_min = 200e6; % 200e6
@@ -74,7 +74,7 @@ for struct_idx = 1:c.N_struct
             setup_output_folder(save_info)
 
             % Specify variables to save
-            vars_to_save = {'WAVEVECTOR_DATA','EIGENVALUE_DATA','c','design_params'};
+            vars_to_save = {'WAVEVECTOR_DATA','EIGENVALUE_DATA','DESIGN_DATA','c','design_params'};
 
             % Specify filename
             save_info.checkpoint_output_file_path_curr = [save_info.output_folder '/checkpoint' num2str(checkpoint_counter) '.mat'];
@@ -100,7 +100,7 @@ if isSaveOutput
     setup_output_folder(save_info)
     
     % Specify variables to save
-    vars_to_save = {'WAVEVECTOR_DATA','EIGENVALUE_DATA','c','design_params'};
+    vars_to_save = {'WAVEVECTOR_DATA','EIGENVALUE_DATA','DESIGN_DATA', 'c','design_params'};
     
     % Specify filename
     save_info.full_output_file_path = [save_info.output_folder '/DATA' ...

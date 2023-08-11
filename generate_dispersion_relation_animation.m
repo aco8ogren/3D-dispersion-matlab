@@ -2,15 +2,7 @@ clear; close all;
 
 mfn = mfilename;
 
-% N = [21,21,11];
-%
-% dat = rand(N);
-%
-% fig = figure;
-%
-% [X,Y,Z] = ndgrid(linspace(-pi,pi,N(1)),linspace(-pi,pi,N(2)),linspace(0,pi,N(3)));
-
-isWriteGif = true;
+isWriteGif = false;
 isSetBackgroundColor = true;
 % BackgroundColor = [218,227,243]; % mylightblue
 BackgroundColor = [0 0 0]; % Black
@@ -24,9 +16,7 @@ ax = axes(fig);
 
 struct_idx = 1;
 eig_idx = 10;
-s = scatter3(data.WAVEVECTOR_DATA(:,1),data.WAVEVECTOR_DATA(:,2),data.WAVEVECTOR_DATA(:,3),[],data.EIGENVALUE_DATA(:,eig_idx,struct_idx),'filled');
-s.MarkerFaceAlpha = 0.3;
-% s.MarkerType = 'o';
+[fig,ax,scat] = visualize_dispersion_band(data.WAVEVECTOR_DATA,data.EIGENVALUE_DATA,eig_idx,struct_idx);
 daspect([1 1 1])
 set(ax,'Visible','off')
 set(ax,'CameraViewAngleMode','Manual')
