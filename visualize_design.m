@@ -1,5 +1,9 @@
 function [fig,ax] = visualize_design(design, property_idx, layer_spacing, ax)
     % Function to visualize a design using cubes in a 3D plot
+    %% TODO
+    % This should be updated to the vectorized version per the method I
+    % used for Rayehe's visualizations
+    %%
 
     % Set default values for property_idx, layer_spacing, and target axes
     if nargin < 2
@@ -25,7 +29,7 @@ function [fig,ax] = visualize_design(design, property_idx, layer_spacing, ax)
     alpha = 1;
 
     % Flag to indicate whether to plot only the interior cubes
-    isPlotInteriorOnly = true;
+    isPlotInteriorOnly = false;
 
     % Iterate over the design elements
     for i1 = 1:sz(1)
