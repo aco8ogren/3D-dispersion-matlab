@@ -31,8 +31,8 @@ function [wv,fr,ev] = dispersion(const,wavevectors)
         else
             parforArg = 0;
         end
-        % for k_idx = 1:size(wavevectors,1); if k_idx == 1; warning('parfor loop is commented out - performance will suffer!')'; end % USE THIS TO DEBUG
-        parfor (k_idx = 1:size(wavevectors,1), parforArg); if k_idx == 1; disp(['Running in parallel.']);  end % USE THIS FOR PERFORMANCE
+        for k_idx = 1:size(wavevectors,1); if k_idx == 1; warning('parfor loop is commented out - performance will suffer!')'; end % USE THIS TO DEBUG
+        % parfor (k_idx = 1:size(wavevectors,1), parforArg); if k_idx == 1; disp(['Running in parallel.']);  end % USE THIS FOR PERFORMANCE
             wavevector = wavevectors(k_idx,:);
             T = get_transformation_matrix(wavevector,const);
             Kr = T'*K*T;
@@ -84,7 +84,7 @@ function [wv,fr,ev] = dispersion(const,wavevectors)
             T = get_transformation_matrix_GPU(wavevector,const);
             Kr = T'*K*T;
             Mr = T'*M*T;
-            
+
             Kr = 0.5*(Kr + Kr');
             Mr = 0.5*(Mr + Mr');
 

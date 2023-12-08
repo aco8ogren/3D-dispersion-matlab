@@ -1,4 +1,6 @@
 clear; close all;
+cd('C:\Users\alex\OneDrive - California Institute of Technology\Documents\Graduate\Research\3D-dispersion-matlab')
+
 save_info.datetime_var = datetime;
 save_info.script_start_time = replace(char(save_info.datetime_var),':','-');
 save_info.mfilename_fullpath_var = mfilename('fullpath');
@@ -7,16 +9,16 @@ save_info.output_folder = ['OUTPUT/output ' save_info.script_start_time];
 
 t_total = tic;
 
-isSaveOutput = true;
+isSaveOutput = false;
 c.isSaveEigenvectors = false;
 
 checkpoint_chunk_size = 1;
 
 % c is the new const
-c.N_pix = [5 5 5];
+c.N_pix = [2 2 2];
 c.N_ele = [1 1 1];
 c.N_eig = 10;
-c.N_struct = 3;
+c.N_struct = 50;
 c.N_wv = [5 5 3];
 c.rng_seed_offset = 0;
 
