@@ -31,13 +31,30 @@ function [wv,fr,ev] = dispersion(const,wavevectors)
         else
             parforArg = 0;
         end
-        for k_idx = 1:size(wavevectors,1); if k_idx == 1; warning('parfor loop is commented out - performance will suffer!')'; end % USE THIS TO DEBUG
-        % parfor (k_idx = 1:size(wavevectors,1), parforArg); if k_idx == 1; disp(['Running in parallel.']);  end % USE THIS FOR PERFORMANCE
+        % for k_idx = 1:size(wavevectors,1); if k_idx == 1; warning('parfor loop is commented out - performance will suffer!')'; end % USE THIS TO DEBUG
+        parfor (k_idx = 1:size(wavevectors,1), parforArg); if k_idx == 1; disp(['Running in parallel.']);  end % USE THIS FOR PERFORMANCE
             wavevector = wavevectors(k_idx,:);
             T = get_transformation_matrix(wavevector,const);
             Kr = T'*K*T;
             Mr = T'*M*T;
 
+            % Check if any rows or columns are entirely zero (meaning that they are
+            % DoF of gridpoints that are not connected to anything, due to voids in
+            % the material)
+            if const.isAllowVoid
+                zero_columns = all(Kr == 0,1);
+                zero_rows = all(Kr == 0,2);
+
+                assert(all(zero_columns(:) == zero_rows(:)))
+
+                Kr(:,zero_columns) = [];
+                Kr(zero_rows,:) = [];
+
+                Mr(:,zero_columns) = [];
+                Mr(zero_rows,:) = [];
+            end
+
+            % Solve the generalized eigenvalue problem
             [eig_vecs,eig_vals] = eigs(Kr,Mr,const.N_eig,const.sigma_eig);
             [eig_vals,idxs] = sort(diag(eig_vals)); % Sort eigenvalues by magnitude
             eig_vecs = eig_vecs(:,idxs); % Sort eigenvectors in corresponding fashion
