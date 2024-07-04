@@ -8,13 +8,13 @@ cmap = 'parula';
 isShowTicks = false;
 isUsePresetFigurePosition = true;
 isExportPdf = false;
-isExportPng = true;
+isExportPng = false;
 PngResolution = 1000;
 isSetBackgroundColor = true;
 BackgroundColor = uint8([218,227,243]); % mylightblue
 
 const.a = 1; % [m]
-const.N_pix = [4 4 4];
+const.N_pix = [10 10 10];
 
 design_params = design_parameters;
 design_params.design_number = []; % leave empty
