@@ -8,3 +8,7 @@
 *.log
 
 OUTPUT/
+
+*.mw
+
+*.mph
