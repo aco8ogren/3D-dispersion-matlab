@@ -9,8 +9,10 @@
 
 OUTPUT/
 
-*.mw
+*.lock
 
 *.mph
+
+*.mw
 
 *.docx
