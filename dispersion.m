@@ -42,8 +42,15 @@ function [wv,fr,ev] = dispersion(const,wavevectors)
             % DoF of gridpoints that are not connected to anything, due to voids in
             % the material)
             if const.isAllowVoid
-                zero_columns = all(Kr == 0,1);
-                zero_rows = all(Kr == 0,2);
+                % zero_columns = all(Kr == 0,1); % Sparse logicals are probably a bad way to store these
+                % zero_rows = all(Kr == 0,2);
+                % 
+                % [nz_rows_all,nz_cols_all] = find(Kr);
+                % nz_rows = unique(nz_rows);
+                % nz_cols = unique(nz_cols);
+                % zero_rows_comp = setdiff(1:size(Kr,1),nz_rows);
+
+                [zero_rows,zero_columns] = get_zero_rows_and_columns(Kr,'find(A) - traditional indices');
 
                 assert(all(zero_columns(:) == zero_rows(:)))
 
@@ -53,6 +60,9 @@ function [wv,fr,ev] = dispersion(const,wavevectors)
                 Mr(:,zero_columns) = [];
                 Mr(zero_rows,:) = [];
             end
+
+            Kr = 1/2*(Kr + Kr');
+            Mr = 1/2*(Mr + Mr');
 
             % Solve the generalized eigenvalue problem
             [eig_vecs,eig_vals] = eigs(Kr,Mr,const.N_eig,const.sigma_eig);

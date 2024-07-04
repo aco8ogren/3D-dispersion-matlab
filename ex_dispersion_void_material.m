@@ -8,13 +8,14 @@ cd('C:\Users\alex\OneDrive - California Institute of Technology\Documents\Gradua
 gcp;
 
 isSaveOutput = false;
+isVisualizeDesign = false;
 c.isSaveEigenvectors = false;
 
 % Set dispersion problem parameters
 % c is the new const
-c.N_pix = [8 8 8];
+c.N_pix = [10 10 10];
 c.N_ele = [1 1 1];
-c.N_eig = 20;
+c.N_eig = 3;
 c.N_struct = 1;
 c.N_wv = [11 5 3];
 c.rng_seed_offset = 0;
@@ -52,11 +53,13 @@ design = repmat(design,1,1,1,3);
 c.design = design;
 
 % Visualize the design
-visualize_design(design,1,0.2)
-title(['Unit cell design' newline 'Yellow indicates material, blue indicates void'])
-xlabel('x')
-ylabel('y')
-zlabel('z')
+if isVisualizeDesign
+    visualize_design(design,1,0.2)
+    title(['Unit cell design' newline 'Yellow indicates material, blue indicates void'])
+    xlabel('x')
+    ylabel('y')
+    zlabel('z')
+end
 
 % Give warning if isSaveOutput flag is false
 if ~isSaveOutput
